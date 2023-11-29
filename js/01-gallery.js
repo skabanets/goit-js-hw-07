@@ -4,7 +4,7 @@ const refs = {
   gallery: document.querySelector(".gallery"),
 };
 
-const galleryItemTemplate = ({ preview, original, description }) => {
+const createGalleryItemTemplate = ({ preview, original, description }) => {
   return `<li class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
@@ -17,12 +17,12 @@ const galleryItemTemplate = ({ preview, original, description }) => {
 </li>`;
 };
 
-const galleryItemsTeamplate = (items) => {
-  return items.map(galleryItemTemplate).join("");
+const createGalleryItemsTeamplate = (items) => {
+  return items.map(createGalleryItemTemplate).join("");
 };
 
 const renderGallery = (items) => {
-  const markup = galleryItemsTeamplate(items);
+  const markup = createGalleryItemsTeamplate(items);
   console.log(markup);
   refs.gallery.innerHTML = markup;
 };
