@@ -46,7 +46,6 @@ const instance = basicLightbox.create(
 );
 
 const onModalKeydown = (e) => {
-  console.log(e.key);
   if (e.key === "Escape") {
     instance.close();
     return;
