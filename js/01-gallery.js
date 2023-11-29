@@ -29,16 +29,27 @@ const renderGallery = (items) => {
 
 renderGallery(galleryItems);
 
-const instance = basicLightbox.create(`
+const instance = basicLightbox.create(
+  `
     <div class="modal">
         <img class="modal-image"> 
     </div>
-`);
+`,
+  {
+    onShow: () => {
+      document.addEventListener("keydown", onModalKeydown);
+    },
+    onClose: () => {
+      document.removeEventListener("keydown", onModalKeydown);
+    },
+  }
+);
 
 const onModalKeydown = (e) => {
+  console.log(e.key);
   if (e.key === "Escape") {
     instance.close();
-    document.removeEventListener("keydown", onModalKeydown);
+    return;
   }
 };
 
@@ -50,8 +61,6 @@ const onGalleryItemClick = (e) => {
   const largeImageSrc = e.target.dataset.source;
   const image = document.querySelector(".modal-image");
   image?.setAttribute("src", largeImageSrc);
-
-  document.addEventListener("keydown", onModalKeydown);
 };
 
 refs.gallery.addEventListener("click", onGalleryItemClick);
